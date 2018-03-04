@@ -15,5 +15,5 @@ If there are known groups in your dataset that may be impacting the overall dist
 
 ## Transformations
 
-If your data does not appear to be normally distributed, you can see how applying $\sqrt[2]{\ }$, $\sqrt[3]{\ }$ and logarithmic transformations impact the tests/visualizations. 
+If your data does not appear to be normally distributed, you can see how applying ![equation](https://latex.codecogs.com/gif.latex?%24%5Csqrt%5B2%5D%7B%5C%3B%7D%24), ![equation](https://latex.codecogs.com/gif.latex?%24%5Csqrt%5B3%5D%7B%5C%3B%7D%24)and logarithmic transformations impact the tests/visualizations. 
 
