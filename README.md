@@ -15,5 +15,5 @@ If there are known groups in your dataset that may be impacting the overall dist
 
 ## Transformations
 
-If your data does not appear to be normally distributed, you can see how applying square-root, cube-root and logarithmic transformations impacts the tests/visualizations. 
+If your data does not appear to be normally distributed, you can see how applying root^2, root^3 and logarithmic transformations impact the tests/visualizations. 
 
