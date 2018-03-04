@@ -1,9 +1,4 @@
----
-title: "NormalDistributionTests"
-output: html_document
----
-
-![](/home/scott/Pictures/pp.png)
+![](pp.png)
 
 ## Usage
 
