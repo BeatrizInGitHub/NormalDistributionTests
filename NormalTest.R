@@ -1,5 +1,6 @@
 library(shiny)
 library(shinythemes)
+library(shinyCustom)
 library(tidyverse)
 library(nortest)
 
@@ -55,57 +56,65 @@ server <- function(input, output, session) {
     if (input$gv) {
       if (input$sqt) {
         g<-ggplot(sqroot,aes_string(x=input$variable)) +
+          geom_histogram(aes(y=..density..),binwidth = input$bins, colour="black", fill="white") +
           geom_density(aes_string(fill=input$groupvar, alpha=.001)) +
           theme_bw() +
           scale_alpha(guide = 'none') +
-          ggtitle("Density Estimation")
+          ggtitle("Histogram/Density Estimation")
         print(g)
       } else if (input$cub) {
         g<-ggplot(cuberoot,aes_string(x=input$variable)) +
+          geom_histogram(aes(y=..density..),binwidth = input$bins, colour="black", fill="white") +
           geom_density(aes_string(fill=input$groupvar, alpha=.001)) +
           theme_bw() +
           scale_alpha(guide = 'none') +
-          ggtitle("Density Estimation")
+          ggtitle("Histogram/Density Estimation")
         print(g)
       } else if (input$log) {
         g<-ggplot(logtrans,aes_string(x=input$variable)) +
+          geom_histogram(aes(y=..density..),binwidth = input$bins, colour="black", fill="white") +
           geom_density(aes_string(fill=input$groupvar, alpha=.001)) +
           theme_bw() +
           scale_alpha(guide = 'none') +
-          ggtitle("Density Estimation")
+          ggtitle("Histogram/Density Estimation")
         print(g)
       } else {
         g<-ggplot(inFile(),aes_string(x=input$variable)) + 
+                geom_histogram(aes(y=..density..),color="black",binwidth = input$bins, fill="white") +
                 geom_density(aes_string(fill=input$groupvar, alpha=.001)) +
                 theme_bw() +
                 scale_alpha(guide = 'none') +
-                ggtitle("Density Estimation")
+                ggtitle("Histogram/Density Estimation")
               print(g)
       }
     } else {
       if (input$sqt) {
         g<-ggplot(sqroot,aes_string(x=input$variable)) +
-          geom_density() +
+          geom_histogram(aes(y=..density..),binwidth = input$bins, colour="black", fill="white") +
+          geom_density(fill="#90C3D4",alpha=.1) +
           theme_bw() +
-          ggtitle("Density Estimation")
+          ggtitle("Histogram/Density Estimation")
         print(g)
       } else if (input$cub) {
         g<-ggplot(cuberoot,aes_string(x=input$variable)) +
-          geom_density() +
+          geom_histogram(aes(y=..density..),binwidth = input$bins, colour="black", fill="white") +
+          geom_density(fill="#90C3D4",alpha=.1) +
           theme_bw() +
-          ggtitle("Density Estimation")
+          ggtitle("Histogram/Density Estimation")
         print(g)
       } else if (input$log) {
         g<-ggplot(logtrans,aes_string(x=input$variable)) +
-          geom_density() +
+          geom_histogram(aes(y=..density..),binwidth = input$bins, colour="black", fill="white") +
+          geom_density(fill="#90C3D4",alpha=.1) +
           theme_bw() +
-          ggtitle("Density Estimation")
+          ggtitle("Histogram/Density Estimation")
         print(g)
       } else {
         g<-ggplot(inFile(),aes_string(x=input$variable)) +
-          geom_density() +
+          geom_histogram(aes(y=..density..),binwidth = input$bins, colour="black", fill="white") +
+          geom_density(alpha= .15, fill="blue") +
           theme_bw() +
-          ggtitle("Density Estimation")
+          ggtitle("Histogram/Density Estimation")
         print(g)
       }
     }
@@ -209,28 +218,28 @@ server <- function(input, output, session) {
     if (input$sqt) {
       g<-ggplot(sqroot,aes_string(sample=input$variable)) +
         stat_qq() +
-        ggtitle("Quantile-Quantile Plot") +
+        ggtitle("Normal Quantile-Quantile Plot") +
         theme_bw() +
         geom_abline(slope = slope, intercept = int,color="blue")
       print(g)
     } else if (input$cub) {
       g<-ggplot(cuberoot,aes_string(sample=input$variable)) +
         stat_qq() +
-        ggtitle("Quantile-Quantile Plot") +
+        ggtitle("Normal Quantile-Quantile Plot") +
         theme_bw() +
         geom_abline(slope = slope, intercept = int,color="blue")
       print(g)
     } else if (input$log) {
       g<-ggplot(logtrans,aes_string(sample=input$variable)) +
         stat_qq() +
-        ggtitle("Quantile-Quantile Plot") +
+        ggtitle("Normal Quantile-Quantile Plot") +
         theme_bw() +
         geom_abline(slope = slope, intercept = int,color="blue")
       print(g)
     } else {
       g<-ggplot(inNumb,aes_string(sample=input$variable)) +
         stat_qq() +
-        ggtitle("Quantile-Quantile Plot") +
+        ggtitle("Normal Quantile-Quantile Plot") +
         theme_bw() +
         geom_abline(slope = slope, intercept = int,color="blue")
       print(g)
@@ -247,7 +256,7 @@ ui <- fluidPage(theme = shinytheme("spacelab"),
                 tags$head(
                   tags$style(HTML("hr {border-top: 3px solid #B8B8B8;}"))
                 ),
-                titlePanel("Normal Distribution Tests"),
+                titlePanel("Distribution Normality Tests"),
   sidebarLayout(
     sidebarPanel(
       fileInput("file1", "Choose CSV File",
@@ -261,6 +270,12 @@ ui <- fluidPage(theme = shinytheme("spacelab"),
       selectInput("variable", "Select Variable for Testing",""),
       checkboxInput('gv', 'Use Grouping Variable? (Optional)', F),
       selectInput("groupvar", "Select Grouping Variable",""),
+      useShinyCustom(slider_delay = "0"),
+      customSliderInput("bins", #Use customSliderInput instead of sliderInput
+                        "Number of bins:",
+                        min = 1,
+                        max = 50,
+                        value = 1),
       hr(),
       h3("Apply Transforms"),
       checkboxInput('sqt', 'Square Root', F),
