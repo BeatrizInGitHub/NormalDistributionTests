@@ -1,20 +1,24 @@
-# **Compositional Analysis & Statistics Suite (CASS)**
+---
+title: "NormalDistributionTests"
+output: html_document
+---
 
-This package (under development) and Shiny app are a suite of statistical analyses and visualizations for user-input compositional data.  It was developed for evaluating chemical relationships between iron slag samples based on the methodologies outlined in Stetkiewicz (2016).
+![](/home/scott/Pictures/pp.png)
 
-## Setup
+## Usage
 
-You'll need to convert your spreadsheet into .CSV format before uploading it.
-* Data will be imported as-is, so each column and row should have a logical title to make analysis and organization easier. 
-* For optimal usage, make sure the oxide names of your dataframe are capitalized (i.e. 'FeO', 'SiO2', etc.) - some of the analyses have presets that use these titles. 
-* If you intend to use the PCA or Correlation Matrix functions, you will need to remove any string vectors prior to those analyses. This can be done in the Modified Data tab.
+This Shiny app is designed to provide a quick, reactive means of uploading any dataset and exploring several popular methods of assessing distribution normality.
 
-## Acknowledgments
+Simply upload your data, select the variable you wish to test, and app will provide:
 
-Like all open-source programs, this project builds off several existing codes and credit goes to each respective R package developer (ggplot2, Shiny, etc.). In particular, [SparseData's Clustering package](https://github.com/sparsedata/cluster-analysis) was immensely helpful in developing this interface, [Barret Schloerke](https://github.com/schloerke) helped with the correlation heatmap, and Nicholas Hamilton's [ggtern package](http://www.ggtern.com) is just plain amazing.  The methods used in this package are largely drawn from several archaeometallurgical publications, which are cited more thoroughly in Stetkiewicz (2016).
+* The *p*-value of the Shaprio-Wilk test
+* The *p*-value of the Anderson-Darling test
+* A visualization of the data distribution
+* A quantile-quantile plot with a qqline
 
-## Citation
+If there are known groups in your dataset that may be impacting the overall distribution of the tested variable, you can select the grouping variable option to view individual color-coded subset distributions.    
 
-If you've found this app useful, please cite it in your research as follows:
+## Transformations
 
-Stetkiewicz, Scott (2016). Compositional Analysis & Statistics Suite (CASS). https://github.com/ScottStetkiewicz/CASS
+If your data does not appear to be normally distributed, you can see how applying square-root, cube-root and logarithmic transformations impacts the tests/visualizations. 
+
