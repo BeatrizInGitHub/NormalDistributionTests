@@ -1,4 +1,4 @@
-![](pp.png)
+![](img.png)
 
 ## Usage
 
