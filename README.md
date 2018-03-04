@@ -8,8 +8,8 @@ Simply upload your data, select the variable you wish to test, and the app will 
 
 * The *p*-value of the Shaprio-Wilk test
 * The *p*-value of the Anderson-Darling test
-* A visualization of the data distribution
-* A quantile-quantile plot with a qqline
+* A visualization of the distribution density (`statdensity`)
+* A normal quantile-quantile plot (`qqnorm`) with a reference line (`qqline`)
 
 If there are known groups in your dataset that may be impacting the overall distribution of the tested variable, you can use the **Select Grouping Variable** option to view individual color-coded subset distributions.    
 
